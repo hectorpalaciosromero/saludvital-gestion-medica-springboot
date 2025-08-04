@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Receta</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Registrar Receta</h1>
+
+<!-- Mostrar mensaje de error si lo hay -->
+<div th:if="${error}" style="color: red;" th:text="${error}"></div>
+
+<form th:action="@{/recetas/guardar}" th:object="${receta}" method="post">
+
+    <label for="paciente">Paciente:</label>
+    <select id="paciente" th:field="*{pacienteId}" required onchange="mostrarAlergias()">
+        <option value="">-- Seleccione --</option>
+        <option th:each="p : ${pacientes}"
+                th:value="${p.id}"
+                th:data-alergias="${p.listaAlergias}"
+                th:selected="${receta.pacienteId} == ${p.id}"
+                th:text="${p.nombre}"></option>
+    </select>
+    <br/>
+
+    <!-- ⚠️ Contenedor para mostrar alergias -->
+    <div id="alergiasPaciente" style="margin: 8px 0; color: red; font-weight: bold;"></div>
+
+    <label for="medico">Médico:</label>
+    <select id="medico" th:field="*{medicoId}" required>
+        <option value="">-- Seleccione --</option>
+        <option th:each="m : ${medicos}" th:value="${m.id}" th:text="${m.nombre}"></option>
+    </select>
+    <br/>
+
+    <label for="medicamento">Medicamento:</label>
+    <select id="medicamento" th:field="*{medicamentoId}" required>
+        <option value="">-- Seleccione --</option>
+        <option th:each="med : ${medicamentos}" th:value="${med.id}" th:text="${med.nombre}"></option>
+    </select>
+    <br/>
+
+    <label for="dosis">Dosis:</label>
+    <input type="text" id="dosis" th:field="*{dosis}" required/>
+    <br/>
+
+    <label for="frecuencia">Frecuencia:</label>
+    <input type="text" id="frecuencia" th:field="*{frecuencia}" required/>
+    <br/>
+
+    <label for="fechaCaducidad">Fecha de Caducidad:</label>
+    <input type="date" id="fechaCaducidad" th:field="*{fechaCaducidad}" required/>
+    <br/>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/recetas}">Cancelar</a>
+</form>
+
+<!-- ✅ JavaScript para mostrar alergias automáticamente -->
+<script>
+    function mostrarAlergias() {
+        const select = document.getElementById("paciente");
+        const selectedOption = select.options[select.selectedIndex];
+        const alergias = selectedOption.getAttribute("data-alergias");
+        const contenedor = document.getElementById("alergiasPaciente");
+
+        if (alergias && alergias.trim() !== "") {
+            contenedor.textContent = "⚠️ Alergias registradas: " + alergias;
+        } else {
+            contenedor.textContent = "✅ No se registran alergias.";
+        }
+    }
+
+    // 🔁 Ejecutar al cargar la página si ya hay un paciente seleccionado
+    window.addEventListener("DOMContentLoaded", () => {
+        const select = document.getElementById("paciente");
+        if (select.value) {
+            mostrarAlergias();
+        }
+    });
+</script>
+
+</body>
+</html>

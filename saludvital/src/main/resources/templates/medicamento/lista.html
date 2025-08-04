@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Medicamentos</title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 10px 20px 0;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #7f8c8d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #616a6b;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .success {
+            background-color: #eafaf1;
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+
+        .error {
+            background-color: #fdecea;
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Lista de Medicamentos</h1>
+
+    <a th:href="@{/medicamentos/nuevo}" class="btn">➕ Nuevo Medicamento</a>
+    <a th:href="@{/}" class="btn btn-secondary">🏠 Volver al Inicio</a>
+
+    <div th:if="${param.exito}" class="message success">✅ Medicamento guardado correctamente</div>
+    <div th:if="${param.actualizado}" class="message success">✅ Medicamento actualizado correctamente</div>
+    <div th:if="${param.eliminado}" class="message error">🗑️ Medicamento eliminado</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="med : ${medicamentos}">
+                <td th:text="${med.id}">1</td>
+                <td th:text="${med.nombre}">Paracetamol</td>
+                <td class="actions">
+                    <a th:href="@{/medicamentos/editar/{id}(id=${med.id})}">✏️ Editar</a>
+                    <a th:href="@{/medicamentos/eliminar/{id}(id=${med.id})}"
+                       onclick="return confirm('¿Seguro que deseas eliminar este medicamento?')">🗑️ Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

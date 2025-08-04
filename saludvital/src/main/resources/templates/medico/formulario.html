@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${medico.id != null} ? 'Editar Médico' : 'Nuevo Médico'">Médico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0" th:text="${medico.id != null} ? '✏️ Editar Médico' : '➕ Registrar Nuevo Médico'"></h2>
+        </div>
+        <div class="card-body">
+
+            <form th:action="@{${medico.id != null} ? '/medicos/actualizar/' + ${medico.id} : '/medicos/guardar'}"
+                  th:object="${medico}" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">👨‍⚕️ Nombre</label>
+                    <input type="text" th:field="*{nombre}" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">📚 Especialidad</label>
+                    <select th:field="*{especialidad}" class="form-select">
+                        <option th:each="e : ${especialidades}" th:value="${e}" th:text="${e}">Cardiología</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">🔒 Rol</label>
+                    <select th:field="*{rol}" class="form-select">
+                        <option th:each="r : ${roles}" th:value="${r}" th:text="${r}">MEDICO</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">💾 Guardar</button>
+                    <a th:href="@{/medicos}" class="btn btn-secondary">❌ Cancelar</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

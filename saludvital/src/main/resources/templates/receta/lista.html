@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Recetas Médicas</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Listado de Recetas</h1>
+
+<a th:href="@{/recetas/nueva}">➕ Nueva Receta</a>
+
+<div th:if="${param.exito}" style="color: green;">✅ Receta registrada correctamente.</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Número</th>
+        <th>Paciente</th>
+        <th>Médico</th>
+        <th>Medicamento</th>
+        <th>Dosis</th>
+        <th>Frecuencia</th>
+        <th>Emitida</th>
+        <th>Caduca</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="r : ${recetas}">
+        <td th:text="${r.numero}">0001</td>
+        <td th:text="${r.paciente != null ? r.paciente.nombre : 'N/A'}">Paciente</td>
+        <td th:text="${r.medico != null ? r.medico.nombre : 'N/A'}">Médico</td>
+        <td th:text="${r.medicamento != null ? r.medicamento.nombre : 'N/A'}">Medicamento</td>
+        <td th:text="${r.dosis}">500 mg</td>
+        <td th:text="${r.frecuencia}">Cada 8 horas</td>
+        <td th:text="${#temporals.format(r.fechaEmision, 'dd/MM/yyyy')}">30/07/2025</td>
+        <td th:text="${#temporals.format(r.fechaCaducidad, 'dd/MM/yyyy')}">29/08/2025</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

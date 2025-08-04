@@ -1,0 +1,60 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# Eclipse
+.classpath
+.project
+.settings/
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
+
+# Visual Studio Code
+.vscode/
+
+# Logs
+*.log
+logs/
+*.out
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Reportes de test y clases compiladas
+/test-output/
+*.class
+
+# Archivos temporales y respaldos
+*.bak
+*.tmp
+*~
+
+# Archivos de entorno (opcionales, no los uses en esta tarea)
+.env
+.env.*

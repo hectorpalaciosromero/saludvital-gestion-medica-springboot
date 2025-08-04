@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${pacienteId != null} ? 'Editar Paciente' : 'Nuevo Paciente'">Paciente</title>
+
+    <!-- Bootstrap 5 CDN (CSS) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilo personalizado opcional -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h2 class="mb-4 text-center" th:text="${pacienteId != null} ? 'Editar Paciente' : 'Registrar Nuevo Paciente'"></h2>
+
+            <!-- Mensaje de error general -->
+            <div th:if="${errorMensaje}" class="alert alert-danger" th:text="${errorMensaje}"></div>
+
+            <form th:action="@{${pacienteId != null} ? '/pacientes/actualizar/' + ${pacienteId} : '/pacientes/guardar'}"
+                  th:object="${pacienteDTO}" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" />
+                    <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Número de Identificación:</label>
+                    <input type="text" class="form-control" th:field="*{numeroIdentificacion}" />
+                    <div class="text-danger" th:if="${#fields.hasErrors('numeroIdentificacion')}" th:errors="*{numeroIdentificacion}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha de Nacimiento:</label>
+                    <input type="date" class="form-control" th:field="*{fechaNacimiento}" />
+                    <div class="text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" th:field="*{tieneAlergias}" id="alergiasCheck"/>
+                    <label class="form-check-label" for="alergiasCheck">¿Tiene Alergias?</label>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Lista de Alergias:</label>
+                    <textarea class="form-control" th:field="*{listaAlergias}" rows="3"></textarea>
+                    <div class="text-danger" th:if="${#fields.hasErrors('listaAlergias')}" th:errors="*{listaAlergias}"></div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <a th:href="@{/pacientes}" class="btn btn-secondary">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (opcional para alertas o interacción) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

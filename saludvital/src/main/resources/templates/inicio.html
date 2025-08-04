@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salud Vital - Inicio</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-800">
+
+    <!-- NAVBAR -->
+    <header class="bg-emerald-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a th:href="@{/}" class="text-2xl font-bold flex items-center gap-2">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M12 8c-1.657 0-3 1.343-3 3v1h6v-1c0-1.657-1.343-3-3-3z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M12 2a10 10 0 100 20 10 10 0 000-20z"></path>
+                </svg>
+                Salud Vital
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow">
+        <section class="bg-emerald-700 text-white py-16 text-center">
+            <h1 class="text-4xl font-extrabold mb-2">Bienvenido a Salud Vital</h1>
+            <p class="text-lg">Seleccione una opción para comenzar</p>
+        </section>
+
+        <section class="container mx-auto px-4 py-10">
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Pacientes -->
+                <a th:href="@{/pacientes}" class="group block bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+                    <div class="flex items-center gap-4">
+                        <svg class="w-8 h-8 text-emerald-600 group-hover:text-emerald-800" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M5.121 17.804A4 4 0 0112 17a4 4 0 016.879.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span class="font-semibold text-lg text-gray-800">Gestión de Pacientes</span>
+                    </div>
+                </a>
+
+                <!-- Médicos -->
+                <a th:href="@{/medicos}" class="group block bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+                    <div class="flex items-center gap-4">
+                        <svg class="w-8 h-8 text-emerald-600 group-hover:text-emerald-800" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M8 10h.01M12 14l2-2 4 4m-4-4v6m-4-2H6a2 2 0 01-2-2V7a2 2 0 012-2h2"/>
+                        </svg>
+                        <span class="font-semibold text-lg text-gray-800">Gestión de Médicos</span>
+                    </div>
+                </a>
+
+                <!-- Citas -->
+                <a th:href="@{/citas}" class="group block bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+                    <div class="flex items-center gap-4">
+                        <svg class="w-8 h-8 text-emerald-600 group-hover:text-emerald-800" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M8 7V3m8 4V3M3 11h18M5 19h14a2 2 0 002-2v-7H3v7a2 2 0 002 2z"/>
+                        </svg>
+                        <span class="font-semibold text-lg text-gray-800">Gestión de Citas</span>
+                    </div>
+                </a>
+
+                <!-- Medicamentos -->
+                <a th:href="@{/medicamentos}" class="group block bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+                    <div class="flex items-center gap-4">
+                        <svg class="w-8 h-8 text-emerald-600 group-hover:text-emerald-800" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M9 14l6-6M7 17a4 4 0 006-6 4 4 0 00-6 6z"/>
+                        </svg>
+                        <span class="font-semibold text-lg text-gray-800">Gestión de Medicamentos</span>
+                    </div>
+                </a>
+
+                <!-- Historial médico -->
+                <a th:href="@{/historial}" class="group block bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+                    <div class="flex items-center gap-4">
+                        <svg class="w-8 h-8 text-emerald-600 group-hover:text-emerald-800" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M8 16h8M8 12h8m-8-4h8M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3-7 3z"/>
+                        </svg>
+                        <span class="font-semibold text-lg text-gray-800">Historial Médico</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER PEGADO ABAJO -->
+    <footer class="bg-emerald-600 text-white text-center py-4 mt-auto">
+        <div class="container mx-auto">
+            &copy; 2025 Salud Vital. Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>
